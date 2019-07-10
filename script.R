@@ -122,5 +122,22 @@ sampleData[sampleData$Age <= 30,]$AgeGroup <- "Young"
 sampleData[sampleData$Age > 30 & sampleData$Age <55, ]$AgeGroup <- "Middle-Age"
 sampleData[sampleData$Age >= 55, ]$AgeGroup <- "Old"
 
+table(sampleData$AgeGroup)
+#Middle-Age        Old      Young 
+#68         11         35 
+
+
+########## Feature Data ##############
+
+featureData(gse)
+varMetadata(gse)
+
+
+
+
+
+
+
+
 
 
