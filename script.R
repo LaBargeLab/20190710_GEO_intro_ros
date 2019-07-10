@@ -257,7 +257,36 @@ median.center.scale.rows <- function(x){
 exprData.geneLevel.MnCtrScl <- mean.center.scale.rows(exprData.geneLevel)
 
 
+#####################################################################
+########## EXTRACT GENE SETS ##########
+#####################################################################
 
+exprData.geneLevel.MnCtrScl["ESR1",]
+exprData.geneLevel.MnCtrScl[c("ESR1", "PGR"),]
+
+#####################################################################
+########## EXTRACT & PLOT GENE SETS  ##########
+#####################################################################
+
+ggplotData <- exprData.geneLevel.MnCtrScl[c("ESR1", "PGR"),]
+ggplotData.melt <- melt(ggplotData)
+colnames(ggplotData.melt) <- c("GeneSymbol", "SampleID", "log2Expr")
+
+head(sampleData)
+ggplotData.melt <- cbind.data.frame(ggplotData.melt,
+                                    sampleData[ggplotData.melt$SampleID, ])
+head(ggplotData.melt)
+rownames(ggplotData.melt) <- NULL
+
+ggplot(ggplotData.melt, aes(x=AgeGroup, y=log2Expr)) +
+  geom_boxplot(aes(fill=AgeGroup)) +
+  facet_wrap(~GeneSymbol)
+
+ggplotData.melt$AgeGroup <- factor(ggplotData.melt$AgeGroup, levels=c("Young", "Middle-Age", "Old"))
+
+ggplot(ggplotData.melt, aes(x=AgeGroup, y=log2Expr)) +
+  geom_boxplot(aes(fill=AgeGroup)) +
+  facet_wrap(~GeneSymbol)
 
 
 
