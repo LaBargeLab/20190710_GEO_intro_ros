@@ -94,3 +94,20 @@ str(pData(gse))
 # $ age:ch1                : chr  "37" "31" "30" "55" ...
 # $ bmi:ch1                : chr  "39.93" "33.45" "31.01" "27.25" ...
 # $ race:ch1               : chr  "black" "black" "black" "white" ...
+
+
+sampleData <- pData(gse)[, c("age:ch1", "bmi:ch1", "race:ch1")] #subsetting columns we find interesting
+colnames(sampleData) <- c("Age", "BMI", "Race")
+str(sampleData)
+
+# 'data.frame':	114 obs. of  3 variables:
+#   $ Age : chr  "37" "31" "30" "55" ...
+# $ BMI : chr  "39.93" "33.45" "31.01" "27.25" ...
+# $ Race: chr  "black" "black" "black" "white" ...
+
+sampleData$Age <- as.numeric(as.character(sampleData$Age))
+sampleData$BMI <- as.numeric(as.character(sampleData$BMI))
+
+
+
+
