@@ -108,6 +108,7 @@ str(sampleData)
 sampleData$Age <- as.numeric(as.character(sampleData$Age))
 sampleData$BMI <- as.numeric(as.character(sampleData$BMI))
 
-
+hist(sampleData$Age)
+hist(sampleData$BMI)
 
 
