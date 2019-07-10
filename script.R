@@ -187,7 +187,11 @@ str(exprData)
 max(exprData)
 min(exprData)
 quartz()
-boxplot(exprData)
+boxplot(exprData, las=2)
+
+# multiple probes could refer to the same gene
+# we'll need to deal with that
+# 
 
 exprData <- as.data.frame(exprData)
 exprData$PROBEID <- probeData.annot$PROBEID
