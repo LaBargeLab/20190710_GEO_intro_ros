@@ -129,8 +129,42 @@ table(sampleData$AgeGroup)
 
 ########## Feature Data ##############
 
-featureData(gse)
+class(featureData(gse))
+
+varLabels(gse)
+featureNames(gse)
 varMetadata(gse)
+
+head(fData(gse))
+tail(fData(gse))
+class(fData(gse))
+
+probeData <- fData(gse)
+head(probeData)
+table(probeData$gene_assignment)
+
+
+######### Annotation
+annotation(gse)
+gpl.annot <- getGEO("GPL17586", AnnotGPL=TRUE) # this function will download the proper annotations
+gpl.annot
+
+# if(!file.exists('GEOmetadb.sqlite')) getSQLiteFile()
+# file.info('GEOmetadb.sqlite')
+# con <- dbConnect(SQLite(),'GEOmetadb.sqlite')
+# dbGetQuery(con,"select gpl, title, bioc_package from gpl where gpl='GPL17586'")
+# # gpl                                                                                title bioc_package
+# # 1 GPL17586 [HTA-2_0] - Affymetrix GeneChip HTA-2_0 - Gene Level - HTA-2_0.r1.Psrs.mps probesets         <NA>
+# dbDisconnect(con)
+
+# https://bioconductor.org/packages/release/BiocViews.html#___AnnotationData
+library(pd.hta.2.0)
+library(affycoretools)
+pd.hta.2.0
+gse <- annotateEset(gse, pd.hta.2.0)
+probeData.annot <- fData(gse)
+head(probeData.annot)
+tail(probeData.annot)
 
 
 
