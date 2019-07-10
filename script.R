@@ -267,6 +267,8 @@ exprData.geneLevel.MnCtrScl[c("ESR1", "PGR"),]
 #####################################################################
 ########## EXTRACT & PLOT GENE SETS  ##########
 #####################################################################
+library(reshape2)
+library(ggplot2)
 
 ggplotData <- exprData.geneLevel.MnCtrScl[c("ESR1", "PGR"),]
 ggplotData.melt <- melt(ggplotData)
