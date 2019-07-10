@@ -222,13 +222,16 @@ length(unique(exprData.filt$SYMBOL))
 # Calculate mean gene level data by ID?
 # Calculate mean gene level data by SYMBOL?
 # Take max gene level data by SYMBOL?
-
-exprData.geneLevel <- exprData.filt %>% group_by(ID.SYMBOL) %>% summarise_if(is.numeric, funs(max(., na.rm = TRUE)))
+  # ros' prefers the last approach.
+  # it will represent the dominant splice version
+library(dplyr)
+exprData.geneLevel <- exprData.filt %>% group_by(SYMBOL) %>% summarise_if(is.numeric, funs(max(., na.rm = TRUE)))
 head(exprData.geneLevel)
 exprData.geneLevel <- as.data.frame(exprData.geneLevel)
 rownames(exprData.geneLevel) <- exprData.geneLevel$SYMBOL
 exprData.geneLevel <- exprData.geneLevel[, -1]
 dim(exprData.geneLevel)
+
 
 
 
