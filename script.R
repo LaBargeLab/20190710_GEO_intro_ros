@@ -25,4 +25,11 @@ gse <- getGEO("GSE102088")
 
 sessionInfo()
 
+class(gse)
+#[1] "list"
+# since it is a list we subset it to a ExpressionSet 
+
+gse <- gse[[1]]
+
+class(gse)
 
