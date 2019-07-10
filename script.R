@@ -19,3 +19,10 @@ gse <- getGEO("GSE102088")
 # good place to find information about the used protocol/platform/technology
 # Platforms (1)	
 # GPL17586	[HTA-2_0] Affymetrix Human Transcriptome Array 2.0 [transcript (gene) version]
+
+#  Samples (114) will you give you information about the specific samples used
+## in this case we can get age information
+
+sessionInfo()
+
+
