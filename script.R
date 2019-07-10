@@ -291,6 +291,81 @@ ggplot(ggplotData.melt, aes(x=AgeGroup, y=log2Expr)) +
   facet_wrap(~GeneSymbol)
 
 
+#####################################################################
+########## PCA ##########
+#####################################################################
+
+pcaData <- t(exprData.geneLevel.MnCtrScl)
+res.pca <- prcomp(pcaData, center=F, scale=F)
+pca.groups.AgeGroup <- sampleData$AgeGroup
+
+# The variance retained by each principal component can be obtained as follow :
+# Eigenvalues
+eig <- (res.pca$sdev)^2
+# Variances in percentage
+variance <- eig*100/sum(eig)
+# Cumulative variances
+cumvar <- cumsum(variance)
+eig.pca.expr <- data.frame(eig = eig, variance = variance,
+                           cumvariance = cumvar)
+head(eig.pca.expr)
+# Use factoextra package to get eigen values
+library(factoextra)
+
+eig.val <- get_eigenvalue(res.pca)
+
+str(res.pca)
+head(res.pca$x)
+ggplotData <- as.data.frame(res.pca$x)
+ggplotData$AgeGroup <- sampleData$AgeGroup
+ggplotData$AgeGroup <- factor(ggplotData$AgeGroup, levels=c("Young", "Middle-Age", "Old"))
+
+ggplot(ggplotData, aes(PC1, PC2)) + 
+  geom_point(aes(color=AgeGroup, shape=AgeGroup), size=3)
+
+
+#####################################################################
+########## HEATMAP  ##########
+#####################################################################
+library(gplots) 
+
+heatmap.2(heatmapData.met, 
+          dendrogram="both", Rowv=T, Colv=T,
+          col=colorRampPalette(c("blue", "black", "yellow"))(100), scale="none", margins=c(1,1),
+          labRow="", labCol="", 
+          symbreaks=FALSE, key=TRUE, symkey=FALSE, keysize=1.75, key.title = "", key.xlab = "log2 Expression",
+          density.info="none", trace="none",
+          ColSideColors=ColSideColors.CellType.SubjectAge,
+          hclust=function(x) hclust(x,method="ward.D2"),
+          distfun=function(x) dist(x,method="euclidean"))
+
+
+###############################################################################
+########## RETAIN & REMOVE ##########
+###############################################################################
+retain.ls <- c(probeData, sampleData)
+
+remove.ls = ls()
+rm(list=setdiff(remove.ls, retain.ls))
+ls()
+
+
+
+###############################################################################
+########## SAVE WORKSPACE ##########
+###############################################################################
+
+# Workspace file name:
+workspace.fileName = 'MORAG_0_v14_LoadData_Annotation_GeneLevel_MdCtr_20180307'
+save.image(file.path(getwd(), paste(workspace.fileName,'.RData', sep = "")))
+
+
+###############################################################################
+########## SESSION INFO ##########
+###############################################################################
+
+sessionInfo()
+
 
 
 
