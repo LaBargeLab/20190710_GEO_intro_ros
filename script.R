@@ -33,3 +33,6 @@ gse <- gse[[1]]
 
 class(gse)
 
+# [1] "ExpressionSet"
+# attr(,"package")
+# [1] "Biobase"
