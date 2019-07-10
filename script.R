@@ -324,41 +324,6 @@ ggplot(ggplotData, aes(PC1, PC2)) +
   geom_point(aes(color=AgeGroup, shape=AgeGroup), size=3)
 
 
-#####################################################################
-########## HEATMAP  ##########
-#####################################################################
-library(gplots) 
-
-heatmap.2(heatmapData.met, 
-          dendrogram="both", Rowv=T, Colv=T,
-          col=colorRampPalette(c("blue", "black", "yellow"))(100), scale="none", margins=c(1,1),
-          labRow="", labCol="", 
-          symbreaks=FALSE, key=TRUE, symkey=FALSE, keysize=1.75, key.title = "", key.xlab = "log2 Expression",
-          density.info="none", trace="none",
-          ColSideColors=ColSideColors.CellType.SubjectAge,
-          hclust=function(x) hclust(x,method="ward.D2"),
-          distfun=function(x) dist(x,method="euclidean"))
-
-
-###############################################################################
-########## RETAIN & REMOVE ##########
-###############################################################################
-retain.ls <- c(probeData, sampleData)
-
-remove.ls = ls()
-rm(list=setdiff(remove.ls, retain.ls))
-ls()
-
-
-
-###############################################################################
-########## SAVE WORKSPACE ##########
-###############################################################################
-
-# Workspace file name:
-workspace.fileName = 'MORAG_0_v14_LoadData_Annotation_GeneLevel_MdCtr_20180307'
-save.image(file.path(getwd(), paste(workspace.fileName,'.RData', sep = "")))
-
 
 ###############################################################################
 ########## SESSION INFO ##########
