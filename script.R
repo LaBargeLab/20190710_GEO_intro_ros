@@ -36,3 +36,19 @@ class(gse)
 # [1] "ExpressionSet"
 # attr(,"package")
 # [1] "Biobase"
+
+str(gse)
+# phenoData gives you info about samples
+# featureData: 
+# annotation: 
+
+
+phenoData(gse)
+
+# An object of class 'AnnotatedDataFrame'
+# sampleNames: GSM2723637 GSM2723638 ... GSM2723750 (114 total)
+# varLabels: title geo_accession ... r
+
+varMetadata(gse)
+
+head(pData(gse)) #gives you the information in dataframe format 
