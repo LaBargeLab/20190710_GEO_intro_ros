@@ -111,4 +111,9 @@ sampleData$BMI <- as.numeric(as.character(sampleData$BMI))
 hist(sampleData$Age)
 hist(sampleData$BMI)
 
+table(sampleData$Race)
+#black other white 
+#32     3    79 
+
+
 
