@@ -210,9 +210,14 @@ exprData.filt <- exprData[!is.na(exprData$SYMBOL), ]
 dim(exprData.filt)
 head(exprData.filt)
 
-length(unique(exprData.filt$PROBEID))
+length(unique(exprData.filt$PROBEID)) #mutliple IDs can map to differnt symbols
+# [1] 42935
 length(unique(exprData.filt$ID))
-length(unique(exprData.filt$SYMBOL))
+# [1] 39157
+length(unique(exprData.filt$SYMBOL)) 
+#[1] 33720
+# so there are 9K events in which a symbols shows up more than once
+
 
 # Calculate mean gene level data by ID?
 # Calculate mean gene level data by SYMBOL?
