@@ -232,8 +232,29 @@ rownames(exprData.geneLevel) <- exprData.geneLevel$SYMBOL
 exprData.geneLevel <- exprData.geneLevel[, -1]
 dim(exprData.geneLevel)
 
+exprData.geneLevel["ESR1",]
+
+#####################################################################
+########## GENE LEVEL CENTER SCALE ##########
+#####################################################################
+
+########### Center FUNCTION
+mean.center.rows <- function(x){
+  return(t(apply(x, 1, function(x) (x - mean(na.omit(x))))))
+}
+median.center.rows <- function(x){
+  return(t(apply(x, 1, function(x) (x - median(na.omit(x))))))
+}
+########### Center Scale FUNCTION
+mean.center.scale.rows <- function(x){
+  return(t(apply(x, 1, function(x) (x - mean(na.omit(x)))/sd(na.omit(x)))))
+}
+median.center.scale.rows <- function(x){
+  return(t(apply(x, 1, function(x) (x - median(na.omit(x)))/sd(na.omit(x)))))
+}
 
 
+exprData.geneLevel.MnCtrScl <- mean.center.scale.rows(exprData.geneLevel)
 
 
 
