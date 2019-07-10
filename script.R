@@ -115,5 +115,12 @@ table(sampleData$Race)
 #black other white 
 #32     3    79 
 
+which(is.na(sampleData$Age)) == T # check of we have samples without age information
+
+sampleData$AgeGroup <- NA
+sampleData[sampleData$Age <= 30,]$AgeGroup <- "Young"
+sampleData[sampleData$Age > 30 & sampleData$Age <55, ]$AgeGroup <- "Middle-Age"
+sampleData[sampleData$Age >= 55, ]$AgeGroup <- "Old"
+
 
 
