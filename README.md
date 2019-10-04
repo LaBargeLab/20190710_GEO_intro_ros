@@ -1,1 +1,1 @@
-This is the readme file.
+Introduction and type along to Ros' introduction how to utilize and access GEO.
